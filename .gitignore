@@ -1,6 +1,6 @@
 
-# Dataset
-data/
+# Local dataset files
+dataset/
 
 # Python
 .venv/
