@@ -13,7 +13,9 @@ def plot_mr_distribution(df):
     plt.savefig("results/figures/mr_distribution.png",
             dpi=300, bbox_inches="tight")
 
-    plt.show()
+    plt.show(block=False)
+    plt.pause(1)
+    plt.close()
 
 
 
@@ -32,7 +34,29 @@ def plot_mr_boxplot(df):
         bbox_inches="tight"
     )
 
-    plt.show()
+    plt.show(block=False)
+    plt.pause(1)
+    plt.close()
+
+def plot_rsq_distribution(df):
+
+    plt.figure(figsize=(10, 6))
+
+    plt.hist(df["Rsq"], bins=50)
+
+    plt.xlabel("Rsq")
+    plt.ylabel("Frequency")
+    plt.title("Distribution of Rsq")
+
+    plt.savefig(
+        "results/figures/rsq_distribution.png",
+        dpi=300,
+        bbox_inches="tight"
+    )
+
+    plt.show(block=False)
+    plt.pause(1)
+    plt.close()
 
 
 if __name__ == "__main__":
@@ -45,16 +69,5 @@ if __name__ == "__main__":
 
     plot_mr_boxplot(df)
 
-
-q1 = df["MR"].quantile(0.25)
-q3 = df["MR"].quantile(0.75)
-
-iqr = q3 - q1
-
-upper_fence = q3 + 1.5 * iqr
-
-potential_outliers = df[df["MR"] > upper_fence]
-
-print("Upper Fence:", upper_fence)
-print("Potential Outliers:", len(potential_outliers))
-print("Percentage:", len(potential_outliers) / len(df) * 100)    
+    plot_rsq_distribution(df)
+    
