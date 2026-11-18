@@ -60,3 +60,27 @@ A small number of events have substantially higher MR values than the majority o
 **Next Step:**
 
 Investigate extreme values using additional statistical and visualization techniques.
+
+### 6. MR Boxplot Analysis
+
+**Method:** Boxplot using the 1.5 × IQR rule.
+
+**Statistical Findings:**
+
+- Q1: 229.79
+- Median: 292.91
+- Q3: 406.88
+- IQR: 177.09
+- Upper Fence: 672.52
+- Percentage of observations above the Upper Fence: 6.49%
+
+**Interpretation:**
+
+Approximately 6.49% of the observations have MR values above the statistical upper fence. These observations are considered potential statistical outliers according to the 1.5 × IQR rule.
+
+However, statistical outliers are not necessarily physically anomalous events. Further investigation using multiple features and physics-aware analysis is required.
+
+**Next Step:**
+
+Investigate the distributions of additional physical variables, particularly Rsq, HT, and MET.
+
