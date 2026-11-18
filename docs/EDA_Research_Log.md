@@ -125,4 +125,34 @@ Further investigation should consider its relationship with MR and other event-l
 
 Calculate the IQR-based upper fence and quantify the percentage of potential statistical outliers.
 
+### 9. Rsq Statistical Outlier Analysis
+
+**Method:** Interquartile Range (IQR) using the 1.5 × IQR rule.
+
+**Results:**
+
+| Metric | Value |
+|---|---:|
+| Q1 | 0.007907 |
+| Median | 0.016817 |
+| Q3 | 0.031612 |
+| IQR | 0.023705 |
+| Upper Fence | 0.067170 |
+| Potential Outliers | 1,001 |
+| Percentage | 4.61% |
+
+**Interpretation:**
+
+A total of 1,001 observations (approximately 4.61% of the dataset) have Rsq values above the statistical upper fence.
+
+These observations are potential statistical outliers, not confirmed physical anomalies.
+
+### 10. Initial Comparison: MR vs Rsq
+
+Both MR and Rsq exhibit right-skewed distributions.
+
+Using the 1.5 × IQR rule, approximately 6.49% of observations were identified above the MR upper fence, compared with 4.61% above the Rsq upper fence.
+
+This comparison highlights differences in their univariate distributions. It does not establish whether the same collision events are unusual across both features.
+
 
