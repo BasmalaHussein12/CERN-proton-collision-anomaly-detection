@@ -84,3 +84,22 @@ However, statistical outliers are not necessarily physically anomalous events. F
 
 Investigate the distributions of additional physical variables, particularly Rsq, HT, and MET.
 
+### 7. Rsq Distribution Analysis
+
+**Visualization:** Histogram of Rsq
+
+**Observation:**
+
+The Rsq distribution exhibits positive (right) skewness, indicating that most observations are concentrated at relatively low values, while fewer observations extend toward higher values.
+
+**Interpretation:**
+
+The distribution is asymmetric, with a longer tail toward higher Rsq values. These higher values may represent statistically unusual events, but they should not automatically be classified as anomalies.
+
+Further investigation is needed to understand the relationship between Rsq and other physical variables, particularly MR.
+
+**Next Step:**
+
+Analyze the Rsq distribution using a boxplot and investigate potential statistical outliers.
+
+
