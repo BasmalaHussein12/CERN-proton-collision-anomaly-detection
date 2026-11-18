@@ -102,4 +102,27 @@ Further investigation is needed to understand the relationship between Rsq and o
 
 Analyze the Rsq distribution using a boxplot and investigate potential statistical outliers.
 
+### 8. Rsq Boxplot Analysis
+
+**Visualization:** Boxplot of Rsq
+
+**Observations:**
+
+- The distribution is strongly right-skewed.
+- The interquartile range is concentrated near zero, indicating that the middle 50% of observations have relatively low and closely grouped Rsq values.
+- Several observations extend beyond the upper whisker.
+- A small number of extreme values appear near 0.72–0.77.
+
+**Interpretation:**
+
+The boxplot indicates that Rsq contains a substantial number of statistically distant observations according to the boxplot's outlier rule.
+
+However, these observations cannot automatically be considered physically anomalous events. Rsq is a Razor kinematic variable, not a machine learning model performance metric.
+
+Further investigation should consider its relationship with MR and other event-level features.
+
+**Next Step:**
+
+Calculate the IQR-based upper fence and quantify the percentage of potential statistical outliers.
+
 
