@@ -59,6 +59,26 @@ def plot_rsq_distribution(df):
     plt.close()
 
 
+def plot_rsq_boxplot(df):
+
+    plt.figure(figsize=(10, 5))
+
+    plt.boxplot(df["Rsq"], vert=False)
+
+    plt.xlabel("Rsq")
+    plt.title("Boxplot of Rsq")
+
+    plt.savefig(
+        "results/figures/rsq_boxplot.png",
+        dpi=300,
+        bbox_inches="tight"
+    )
+
+    plt.show(block=False)
+    plt.pause(1)
+    plt.close()
+
+
 if __name__ == "__main__":
 
     from src.data_loader import load_data
@@ -70,4 +90,6 @@ if __name__ == "__main__":
     plot_mr_boxplot(df)
 
     plot_rsq_distribution(df)
+
+    plot_rsq_boxplot(df)
     
