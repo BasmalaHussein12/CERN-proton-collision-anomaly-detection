@@ -84,32 +84,30 @@ if __name__ == "__main__":
 
     df = load_data()
 
+    # Visualizations
     plot_mr_distribution(df)
-
     plot_mr_boxplot(df)
-
     plot_rsq_distribution(df)
-
     plot_rsq_boxplot(df)
 
+    # Rsq Outlier Analysis
+    q1 = df["Rsq"].quantile(0.25)
+    q3 = df["Rsq"].quantile(0.75)
 
-q1 = df["Rsq"].quantile(0.25)
-q3 = df["Rsq"].quantile(0.75)
+    iqr = q3 - q1
 
-iqr = q3 - q1
+    upper_fence = q3 + 1.5 * iqr
 
-upper_fence = q3 + 1.5 * iqr
+    potential_outliers = df[df["Rsq"] > upper_fence]
 
-potential_outliers = df[df["Rsq"] > upper_fence]
+    print("Rsq Q1:", q1)
+    print("Rsq Q3:", q3)
+    print("Rsq IQR:", iqr)
+    print("Upper Fence:", upper_fence)
 
-print("Rsq Q1:", q1)
-print("Rsq Q3:", q3)
-print("Rsq IQR:", iqr)
-print("Upper Fence:", upper_fence)
+    print("Number of Potential Outliers:", len(potential_outliers))
 
-print("Number of Potential Outliers:", len(potential_outliers))
-
-print(
-    "Percentage:",
-    len(potential_outliers) / len(df) * 100
-)    
+    print(
+        "Percentage:",
+        len(potential_outliers) / len(df) * 100
+    )

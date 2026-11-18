@@ -156,3 +156,22 @@ Using the 1.5 × IQR rule, approximately 6.49% of observations were identified a
 This comparison highlights differences in their univariate distributions. It does not establish whether the same collision events are unusual across both features.
 
 
+### Rsq Statistical Outlier Analysis
+
+The Interquartile Range (IQR) method was applied to identify potentially unusual values in the Rsq feature.
+
+**Results:**
+- Q1: 0.00791
+- Q3: 0.03161
+- IQR: 0.02371
+- Upper Fence: 0.06717
+- Number of potential outliers: 1,001
+- Percentage of potential outliers: 4.61%
+
+**Interpretation:**
+
+Approximately 4.61% of the observations have Rsq values above the upper IQR fence. This indicates the presence of a relatively small group of observations with unusually high Rsq values compared to the central distribution.
+
+However, these observations should not automatically be classified as physical anomalies or removed from the dataset. The IQR method identifies statistical outliers in a single feature and does not establish whether an event is physically anomalous.
+
+Further multivariate analysis is required to investigate these observations in relation to other kinematic features.
