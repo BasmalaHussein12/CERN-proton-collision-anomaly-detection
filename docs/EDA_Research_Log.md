@@ -36,3 +36,27 @@ These ranges require further investigation through visualization and domain-awar
 - Investigate skewness and extreme values.
 - Examine potential outliers.
 - Interpret unusual observations in their physical context.
+
+### 5. MR Distribution Analysis
+
+**Visualization:** Histogram of MR
+
+**Observation:**
+
+The MR feature exhibits a right-skewed distribution, with most observations concentrated at relatively lower values and a long tail extending toward higher values.
+
+**Statistical Evidence:**
+
+- Mean: 351.98
+- Median: 292.91
+- Maximum: 2433.82
+
+The mean being greater than the median supports the observed positive skewness.
+
+**Interpretation:**
+
+A small number of events have substantially higher MR values than the majority of observations. These events require further investigation and should not automatically be classified as anomalies.
+
+**Next Step:**
+
+Investigate extreme values using additional statistical and visualization techniques.
