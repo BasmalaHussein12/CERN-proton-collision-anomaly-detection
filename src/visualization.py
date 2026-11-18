@@ -78,7 +78,6 @@ def plot_rsq_boxplot(df):
     plt.pause(1)
     plt.close()
 
-
 if __name__ == "__main__":
 
     from src.data_loader import load_data
@@ -92,4 +91,25 @@ if __name__ == "__main__":
     plot_rsq_distribution(df)
 
     plot_rsq_boxplot(df)
-    
+
+
+q1 = df["Rsq"].quantile(0.25)
+q3 = df["Rsq"].quantile(0.75)
+
+iqr = q3 - q1
+
+upper_fence = q3 + 1.5 * iqr
+
+potential_outliers = df[df["Rsq"] > upper_fence]
+
+print("Rsq Q1:", q1)
+print("Rsq Q3:", q3)
+print("Rsq IQR:", iqr)
+print("Upper Fence:", upper_fence)
+
+print("Number of Potential Outliers:", len(potential_outliers))
+
+print(
+    "Percentage:",
+    len(potential_outliers) / len(df) * 100
+)    
