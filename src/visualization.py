@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from pathlib import Path
 import seaborn as sns
+import numpy as np
 
 def plot_mr_distribution(df):
 
@@ -231,6 +232,46 @@ def compare_kde_bandwidths(df, feature):
 
     plt.close()
 
+def plot_feature_scatter(df, feature_x, feature_y):
+
+    plt.figure(figsize=(8, 6))
+
+    plt.scatter(
+        df[feature_x],
+        df[feature_y],
+        alpha=0.4,
+        s=10
+    )
+
+    plt.xlabel(feature_x)
+    plt.ylabel(feature_y)
+    plt.title(f"{feature_x} vs {feature_y}")
+
+    plt.savefig(
+        f"results/figures/{feature_x}_{feature_y}_scatter.png",
+        dpi=300,
+        bbox_inches="tight"
+    )
+
+    plt.close()
+
+def plot_transverse_momentum(df):
+    pt = np.sqrt(df["Px1"]**2 + df["Py1"]**2)
+
+    plt.figure(figsize=(10, 6))
+    plt.hist(pt, bins=50)
+
+    plt.xlabel("Transverse Momentum (PT)")
+    plt.ylabel("Frequency")
+    plt.title("Transverse Momentum Distribution")
+
+    plt.savefig(
+        "results/figures/Px1_Py1_transverse_momentum.png",
+        dpi=300,
+        bbox_inches="tight"
+    )
+    plt.close()
+
 if __name__ == "__main__":
 
     from src.data_loader import load_data
@@ -340,3 +381,7 @@ if __name__ == "__main__":
 
     compare_kde_bandwidths(df, "Px1")
     compare_kde_bandwidths(df, "Py1")
+
+    plot_feature_scatter(df, "Px1", "Py1")
+
+    plot_transverse_momentum(df)

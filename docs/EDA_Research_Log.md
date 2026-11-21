@@ -277,4 +277,39 @@ A bandwidth adjustment of 1.0 or 1.5 may be suitable for further visualization, 
 
 Further investigation is required to understand the relationship between these momentum components and other event-level variables.
 
+------------------------------------------------------------------------------------------------------------
+
+### Bivariate Analysis: Px1 vs Py1
+
+I examined the relationship between `Px1` and `Py1`
+using a two-dimensional scatter plot.
+
+**Initial observations:**
+- The distribution appears to exhibit a ring-like structure.
+- Point density seems relatively low near the origin.
+- The distribution appears approximately circular.
+- A diffuse population of points extends beyond the
+  main concentration.
+
+**Initial interpretation:**
+
+The observed structure may explain the apparent
+bimodality in the individual distributions of `Px1`
+and `Py1`.
+
+However, the physical origin of this pattern is not
+yet established. Possible explanations, such as
+kinematic selection effects or reconstruction
+constraints, require further investigation.
+
+**Next step:**
+
+Calculate and examine the transverse momentum:
+
+PT = sqrt(Px1^2 + Py1^2)
+
+This will help determine whether the apparent
+ring-like structure corresponds to a preferred
+transverse momentum range.
+
 **Basmala Hussein**
