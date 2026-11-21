@@ -1,4 +1,6 @@
 import matplotlib.pyplot as plt
+import pandas as pd
+from pathlib import Path
 
 def plot_mr_distribution(df):
 
@@ -23,7 +25,7 @@ def plot_mr_boxplot(df):
 
     plt.figure(figsize=(10, 5))
 
-    plt.boxplot(df["MR"], vert=False)
+    plt.boxplot(df["MR"], orientation="horizontal")
 
     plt.xlabel("MR")
     plt.title("Boxplot of MR")
@@ -63,7 +65,7 @@ def plot_rsq_boxplot(df):
 
     plt.figure(figsize=(10, 5))
 
-    plt.boxplot(df["Rsq"], vert=False)
+    plt.boxplot(df["Rsq"], orientation="horizontal")
 
     plt.xlabel("Rsq")
     plt.title("Boxplot of Rsq")
@@ -78,6 +80,110 @@ def plot_rsq_boxplot(df):
     plt.pause(1)
     plt.close()
 
+def plot_feature_distribution(df, feature):
+
+    plt.figure(figsize=(10, 6))
+
+    plt.hist(df[feature].dropna(), bins=50)
+
+    plt.xlabel(feature)
+    plt.ylabel("Frequency")
+    plt.title(f"Distribution of {feature}")
+
+    plt.tight_layout()
+
+    plt.savefig(
+        f"results/figures/{feature.lower()}_distribution.png",
+        dpi=300,
+        bbox_inches="tight"
+    )
+
+    plt.close()
+
+
+def plot_feature_boxplot(df, feature):
+
+    plt.figure(figsize=(10, 5))
+
+    plt.boxplot(
+        df[feature].dropna(),
+        orientation="horizontal"
+    )
+
+    plt.xlabel(feature)
+    plt.title(f"Boxplot of {feature}")
+
+    plt.tight_layout()
+
+    plt.savefig(
+        f"results/figures/{feature.lower()}_boxplot.png",
+        dpi=300,
+        bbox_inches="tight"
+    )
+
+    plt.close()
+
+
+def plot_discrete_feature(df, feature):
+
+    counts = df[feature].value_counts().sort_index()
+
+    plt.figure(figsize=(9, 5))
+
+    plt.bar(
+        counts.index.astype(str),
+        counts.values
+    )
+
+    plt.xlabel(feature)
+    plt.ylabel("Frequency")
+    plt.title(f"Frequency Distribution of {feature}")
+
+    plt.tight_layout()
+
+    plt.savefig(
+        f"results/figures/{feature.lower()}_frequency.png",
+        dpi=300,
+        bbox_inches="tight"
+    )
+
+    plt.close()
+
+
+def analyze_all_features(df):
+
+    Path("results/figures").mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    continuous_features = [
+        "MR", "Rsq",
+        "E1", "Px1", "Py1", "Pz1",
+        "E2", "Px2", "Py2", "Pz2",
+        "HT", "MET"
+    ]
+
+    discrete_features = [
+        "nJets", "nBJets"
+    ]
+
+    for feature in continuous_features:
+
+        print(f"Analyzing {feature}...")
+
+        plot_feature_distribution(df, feature)
+        plot_feature_boxplot(df, feature)
+
+    for feature in discrete_features:
+
+        print(f"Analyzing {feature}...")
+
+        plot_discrete_feature(df, feature)
+
+    print("\nUnivariate visualization completed.")
+
+
 if __name__ == "__main__":
 
     from src.data_loader import load_data
@@ -85,10 +191,7 @@ if __name__ == "__main__":
     df = load_data()
 
     # Visualizations
-    plot_mr_distribution(df)
-    plot_mr_boxplot(df)
-    plot_rsq_distribution(df)
-    plot_rsq_boxplot(df)
+    analyze_all_features(df)
 
     # Rsq Outlier Analysis
     q1 = df["Rsq"].quantile(0.25)
@@ -110,4 +213,77 @@ if __name__ == "__main__":
     print(
         "Percentage:",
         len(potential_outliers) / len(df) * 100
+    )
+
+    # Feature Inventory
+
+    print("\n========== DATASET OVERVIEW ==========")
+
+    print("Dataset Shape:", df.shape)
+
+    print("\n========== FEATURE NAMES ==========")
+    print(df.columns.tolist())
+
+    print("\n========== DATA TYPES ==========")
+    print(df.dtypes)
+
+    print("\n========== DATA QUALITY ==========")
+
+    inventory = pd.DataFrame({
+        "Data Type": df.dtypes,
+        "Unique Values": df.nunique(),
+        "Missing Values": df.isnull().sum(),
+        "Missing Percentage": (
+            df.isnull().mean() * 100
+        )
+    })
+
+    print(inventory)
+
+    print("\n========== DUPLICATES ==========")
+    print("Duplicate Rows:", df.duplicated().sum())
+
+    print("\n========== STATISTICAL SUMMARY ==========")
+    print(df.describe().T)
+
+
+    # Extended Statistical Investigation
+
+    numeric_features = df.select_dtypes(
+        include="number"
+    ).columns.drop(
+        ["Run", "Lumi", "Event"],
+        errors="ignore"
+    )
+
+    print("\n========== SKEWNESS ==========")
+
+    print(
+        df[numeric_features]
+        .skew()
+        .sort_values(ascending=False)
+    )
+
+    print("\n========== ZERO VALUES ==========")
+
+    print(
+        (df[numeric_features] == 0)
+        .sum()
+        .sort_values(ascending=False)
+    )
+
+    print("\n========== NEGATIVE VALUES ==========")
+
+    print(
+        (df[numeric_features] < 0)
+        .sum()
+        .sort_values(ascending=False)
+    )
+
+    print("\n========== ADDITIONAL QUANTILES ==========")
+
+    print(
+        df[numeric_features].quantile(
+            [0.01, 0.05, 0.95, 0.99]
+        ).T
     )
