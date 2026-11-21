@@ -242,4 +242,20 @@ The univariate analysis revealed several patterns across the dataset:
 
 At this stage, no observations are classified as confirmed physical anomalies or new-physics signals.
 
+### Bimodal Distribution in Transverse Momentum Components
+
+During the univariate analysis, I observed a bimodal pattern in both `Px1` and `Py1`.
+
+The KDE visualizations show two apparent density peaks, approximately around negative and positive values, with a local minimum near zero.
+
+This pattern is worth investigating further. However, I cannot yet attribute it to a specific physical process or reconstruction mechanism.
+
+Further analysis will include:
+- Quantifying the locations of local density maxima.
+- Checking the sensitivity of the KDE shape to bandwidth selection.
+- Investigating the relationship between `Px1` and `Py1`.
+- Comparing the distributions with other kinematic variables.
+
+At this stage, bimodality is treated as a statistical observation rather than evidence of a particular physical phenomenon.
+
 **Basmala Hussein**
