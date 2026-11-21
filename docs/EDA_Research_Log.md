@@ -258,4 +258,23 @@ Further analysis will include:
 
 At this stage, bimodality is treated as a statistical observation rather than evidence of a particular physical phenomenon.
 
+### KDE Bandwidth Sensitivity Analysis
+
+I investigated the apparent bimodal distributions of `Px1` and `Py1` by comparing KDE curves using different bandwidth adjustment factors: 0.5, 1.0, 1.5, and 2.0.
+
+**Observations:**
+
+- Increasing the bandwidth reduces peak heights and produces smoother density curves.
+- The central valley becomes progressively smoother as the bandwidth increases.
+- Two distinct density peaks remain visible across the tested bandwidth settings for both variables.
+- The overall bimodal pattern appears relatively stable within the tested range.
+
+**Interpretation:**
+
+The persistence of two peaks across different bandwidth settings provides additional visual support for the bimodal pattern. However, this does not establish its physical origin or rule out possible reconstruction and data-processing effects.
+
+A bandwidth adjustment of 1.0 or 1.5 may be suitable for further visualization, subject to additional validation.
+
+Further investigation is required to understand the relationship between these momentum components and other event-level variables.
+
 **Basmala Hussein**

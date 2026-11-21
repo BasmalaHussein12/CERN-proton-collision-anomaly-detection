@@ -202,6 +202,35 @@ def plot_feature_kde(df, feature):
 
     plt.close()
 
+def compare_kde_bandwidths(df, feature):
+
+    plt.figure(figsize=(10, 6))
+
+    bandwidths = [0.5, 1, 1.5, 2]
+
+    for bw in bandwidths:
+
+        sns.kdeplot(
+            data=df,
+            x=feature,
+            bw_adjust=bw,
+            cut=0,
+            label=f"Bandwidth = {bw}"
+        )
+
+    plt.title(f"KDE Bandwidth Comparison - {feature}")
+    plt.xlabel(feature)
+    plt.ylabel("Density")
+    plt.legend()
+
+    plt.savefig(
+        f"results/figures/{feature}_kde_bandwidth.png",
+        dpi=300,
+        bbox_inches="tight"
+    )
+
+    plt.close()
+
 if __name__ == "__main__":
 
     from src.data_loader import load_data
@@ -305,5 +334,9 @@ if __name__ == "__main__":
             [0.01, 0.05, 0.95, 0.99]
         ).T
     )
+
     plot_feature_kde(df, "Px1")
     plot_feature_kde(df, "Py1")
+
+    compare_kde_bandwidths(df, "Px1")
+    compare_kde_bandwidths(df, "Py1")
