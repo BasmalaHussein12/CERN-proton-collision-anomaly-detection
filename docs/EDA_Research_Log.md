@@ -175,3 +175,71 @@ Approximately 4.61% of the observations have Rsq values above the upper IQR fenc
 However, these observations should not automatically be classified as physical anomalies or removed from the dataset. The IQR method identifies statistical outliers in a single feature and does not establish whether an event is physically anomalous.
 
 Further multivariate analysis is required to investigate these observations in relation to other kinematic features.
+
+## 2. Dataset Overview and Initial Data Quality Assessment
+
+### 2.1 Dataset Overview
+
+The dataset contains 21,726 observations and 17 columns.
+
+The features include event identifiers, derived physics variables, energy measurements, momentum components, event activity variables, and jet multiplicity information.
+
+### 2.2 Initial Data Quality
+
+The initial inspection revealed:
+
+- No missing values across the 17 columns.
+- No completely duplicated rows.
+- All numerical columns have valid numeric data types.
+
+These findings indicate complete data coverage at the initial inspection stage. However, further physical consistency and event identifier checks are still required.
+
+### 2.3 Initial Statistical Observations
+
+**MR and Rsq**
+
+Both variables show a noticeable difference between their means and medians, suggesting potentially right-skewed distributions.
+
+For Rsq, the IQR method identified 1,001 potential upper outliers, representing approximately 4.61% of the observations.
+
+**Energy Variables**
+
+E1 and E2 have means greater than their medians, suggesting right-skewed distributions with relatively high values in their upper tails.
+
+**Momentum Components**
+
+The momentum components contain both positive and negative values, which is consistent with their directional nature.
+
+**HT and MET**
+
+Both variables exhibit relatively large maximum values compared with their upper quartiles. Their distributions require further investigation.
+
+**Jet Multiplicity**
+
+nJets ranges from 2 to 7, while nBJets ranges from 0 to 2. The third quartile of nBJets is zero, indicating that at least 75% of the observations have zero b-tagged jets.
+
+### 2.4 Next Investigation Steps
+
+- Extended statistical analysis using skewness and additional quantiles.
+- Zero and negative value investigation.
+- Complete univariate analysis of all physics features.
+- Multivariate correlation analysis.
+- Physics-based consistency checks.
+
+### Univariate Distribution Observations
+
+The univariate analysis revealed several patterns across the dataset:
+
+1. **Jet Multiplicity:** `nJets` is concentrated around low multiplicities, with 2 jets being the most frequent observation. The frequency decreases as the number of jets increases.
+
+2. **B-tagged Jet Multiplicity:** `nBJets` is highly imbalanced, with approximately 94.89% of events containing zero b-tagged jets.
+
+3. **Energy and Event Activity Variables:** `MR`, `Rsq`, `E1`, `E2`, `HT`, and `MET` exhibit varying degrees of positive skewness and extended upper tails. Their extreme values require further investigation rather than immediate removal.
+
+4. **Momentum Components:** The momentum components contain both positive and negative values, reflecting directional information. Their distribution shapes and symmetry should be investigated further before making physical interpretations.
+
+5. **Potential Extreme Values:** Several variables contain observations far beyond their central ranges. These observations will be examined using statistical methods and, where possible, physics-based consistency checks.
+
+At this stage, no observations are classified as confirmed physical anomalies or new-physics signals.
+
+**Basmala Hussein**

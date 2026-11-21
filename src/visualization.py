@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 from pathlib import Path
+import seaborn as sns
 
 def plot_mr_distribution(df):
 
@@ -183,6 +184,23 @@ def analyze_all_features(df):
 
     print("\nUnivariate visualization completed.")
 
+def plot_feature_kde(df, feature):
+
+    plt.figure(figsize=(10, 6))
+
+    sns.kdeplot(data=df, x=feature, fill=True)
+
+    plt.title(f"KDE Distribution of {feature}")
+    plt.xlabel(feature)
+    plt.ylabel("Density")
+
+    plt.savefig(
+        f"results/figures/{feature}_kde.png",
+        dpi=300,
+        bbox_inches="tight"
+    )
+
+    plt.close()
 
 if __name__ == "__main__":
 
@@ -287,3 +305,5 @@ if __name__ == "__main__":
             [0.01, 0.05, 0.95, 0.99]
         ).T
     )
+    plot_feature_kde(df, "Px1")
+    plot_feature_kde(df, "Py1")
